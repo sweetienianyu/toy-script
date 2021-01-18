@@ -4,6 +4,11 @@
 
 const {evaluate} = require('./eval')
 const { topScope } = require('./scope')
+/**
+ * 接受一个字符串作为输入并返回一个对象 该对象包含了字符串起始位置处表达式的数据结构与解析表达式后剩余的字符串
+ * @param {*} program 
+ * 
+ */
 function parseExpression(program) {
   program = skipSpace(program);
   let match, expr;
@@ -19,6 +24,7 @@ function parseExpression(program) {
 
   return parseApply(expr, program.slice(match[0].length));
 }
+parseExpression("+(a, 10)")
 
 function skipSpace(string) {
   let first = string.search(/\S/);
@@ -52,8 +58,6 @@ function parse(program) {
   }
   return expr;
 }
-
-
 
 // console.log(parse("+(a, 10)"));
 // → {type: "apply",
